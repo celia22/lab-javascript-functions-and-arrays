@@ -60,20 +60,26 @@ sumNumbers(numbers)
 const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
 
 const sum = (arr) =>{
-  let sumar = 0; 
-
-   arr.forEach(function(item){
-      if(typeof item !== "string"){
+  let sumar = 0;
+  
+arr.forEach(function(item){
+      if(typeof item === "object" || typeof item === "array"){
+        throw Error
+      } else if (typeof item !== "string"){
          item.toString();
-         sumar += item
-        } else {
+         sumar += item 
+      } else {
          sumar += item.length;
-        };           
+      };    
+           
     });     
-    return sumar   
+    return sumar    
+
+   
 };
 
 console.log(sum(mixedArr))
+
 
 
 
@@ -127,19 +133,26 @@ const avg = (arr) =>{
   let average = 0; 
 
    arr.forEach(function(item){
-      if(typeof item !== "string"){
-         item.toString();
-         sumar += item
-        } else {
-         sumar += item.length;
-         };
+       if(typeof arr === "object" || typeof item === "array" || arr.length > 0){
+           if (typeof item !== "string"){
+               item.toString();
+                sumar += item 
+            } else {
+               sumar += item.length;
+            };
+      } else {
+        throw Error("Unsupported data type sir or ma'am")
 
-    });
-    average = sumar / arr.length      
+    };    
+
+     });
+    average = sumar / arr.length
+    average = Math.round(average * 100) / 100      
     return  average
 };
 
 console.log(avg(mixedArr));
+
 
 
 
